@@ -29,10 +29,10 @@ clean() {
     echo "Restart Wazo-Provd"
     systemctl restart xivo-provd
     echo "Done"
-    echo "Reconfigure Devices Configuration"
+    echo "Reconfigure Devices Configuration ${using_pluging}"
     xivo-provd-cli -c 'devices.using_plugin("${using_pluging}").reconfigure()'
     echo "Done"
-    echo "Synchronysing Devices"
+    echo "Synchronysing Devices ${using_pluging}"
     xivo-provd-cli -c 'devices.using_plugin("${using_pluging}").synchronize()'
     echo "Done"
     echo "All is good, bye"
