@@ -1,11 +1,9 @@
 #!/bin/bash
 
-set +x
-
 usage() {
     cat >&3 <<EOF
-Usage: $0 <new IP address> <new gateway>
-Change the VOIP ip address of the engine
+Usage: $0 <Last IP address> <New IP address> <Pluging Device>
+Change the ip address of the Wazo Phonebook
 EOF
 	exit 1
 }
@@ -13,25 +11,6 @@ EOF
 if [ "$#" -ne 3 ]; then
    usage
 fi
-
-#IP="${1}"
-#GATEWAY="${2}"
-#last_ip=$(echo ${1} | awk -F. '{printf "%d\.%d\.%d\.%d\\", $1,$2,$3,$4}')
-#new_ip=$(echo ${2} | awk -F. '{printf "%d\.%d\.%d\.%d\\", $1,$2,$3,$4}')
-
-#echo "${last_ip} and ${new_ip}"
-#echo "sed -i '.bak' 's/"X_xivo_phonebook_ip":"${1}"/"X_xivo_phonebook_ip":"${2}"/g' base"
-#sed -i '.bak' 's/\"X\_xivo\_phonebook\_ip\"\:\"${last_ip}\"/\"X\_xivo\_phonebook\_ip\"\:\"tessst\"/g' base
-
-#sed -i '.bak' 's/\"X\_xivo\_phonebook\_ip\"\:\"192\.168\.1\.20\"/\"X\_xivo\_phonebook\_ip\"\:\"tessst\"/g' base
-
-
-#sed -i '.bak' 's/"X_xivo_phonebook_ip":"${last_ip}"/"X_xivo_phonebook_ip":"${new_ip}"/g' base
-#cat base
-#rm base.bak
-#sed -i '.bak' 's/\"X\_xivo\_phonebook\_ip\"\:\"tessst\"/\"X\_xivo\_phonebook\_ip\"\:\"192\.168\.1\.20\"/g' base
-#cat base
-#rm base.bak
 
 replace() {
     local search=$1
@@ -43,6 +22,10 @@ replace() {
     sed -i "" "s/${search}/${replace}/g" /var/lib/xivo-provd/jsondb/configs/base
     echo "Replaced, result :"
     cat /var/lib/xivo-provd/jsondb/configs/base
+    clean ${using_pluging}
+}
+
+clean() {
     echo "Restart Wazo-Provd"
     systemctl restart xivo-provd
     echo "Done"
