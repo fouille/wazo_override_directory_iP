@@ -19,7 +19,7 @@ replace() {
     # Note the double quotes
     echo "Last IP : ${search} / New IP : ${replace}"
     echo "Replace..."
-    sed -i "" "s/${search}/${replace}/g" /var/lib/xivo-provd/jsondb/configs/base
+    sed -i "s/${search}/${replace}/g" /var/lib/xivo-provd/jsondb/configs/base
     echo "Replaced, result :"
     cat /var/lib/xivo-provd/jsondb/configs/base
     clean ${using_pluging}
