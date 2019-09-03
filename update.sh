@@ -21,7 +21,7 @@ replace() {
     echo "Replace..."
     sed -i "s/${search}/${replace}/g" /var/lib/wazo-provd/jsondb/configs/base
     echo "Replaced, result :"
-    cat /var/lib/xivo-provd/jsondb/configs/base
+    cat /var/lib/wazo-provd/jsondb/configs/base
     clean ${using_pluging}
 }
 
