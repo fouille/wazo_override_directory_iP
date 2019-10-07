@@ -1,11 +1,11 @@
 #!/bin/bash
 
 bye() {
-whiptail --title "Hello Wazo HELP / IP PhoneBook" --msgbox "Please reset or re-provision your devices\nHave a nice day :-) Wazo Support$
+whiptail --title "Hello Wazo HELP / IP PhoneBook" --msgbox "Please reset or re-provision your devices\nHave a nice day :-) Wazo Support." 10 60
 }
 
 autorize_subnets() {
-IP_authorize=$(whiptail --title "Hello Wazo HELP / IP Authorize Subnet" --inputbox "Please insert Public IP to authorize\nExemple :\nFo$
+IP_authorize=$(whiptail --title "Hello Wazo HELP / IP Authorize Subnet" --inputbox "Please insert Public IP to authorize\nExemple :\nFor single IP : 10.10.10.10\nFor single IP Subnet : 10.10.10.10/24\nFor multiple IP or Subnets : 10.10.10.10/24, 1.1.1.1" 13 60 3>&1 1>&2 2>&3)
 
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
@@ -57,7 +57,7 @@ EOF
 
 } | whiptail --gauge "Veuillez patienter" 6 60 0
 
-  if (whiptail --title "Hello Wazo HELP / IP Authorize Subnet" --yesno "Would you configure Authorize Subnets ?\nFor security reason th$
+  if (whiptail --title "Hello Wazo HELP / IP Authorize Subnet" --yesno "Would you configure Authorize Subnets ?\nFor security reason the directory isn't accessible by default" 10 60) then
           autorize_subnets
   fi
 
