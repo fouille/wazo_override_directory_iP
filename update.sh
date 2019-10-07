@@ -9,12 +9,6 @@ IP_authorize=$(whiptail --title "Hello Wazo HELP / IP Authorize Subnet" --inputb
 
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
-touch /etc/wazo-phoned/conf.d/010-subnets.yml
-cat > /etc/wazo-phoned/conf.d/010-subnets.yml <<EOF
-debug: yes
-rest_api:
-  authorized_subnets: [$IP_authorize]
-EOF
 {
     echo -e "XXX\n0\nAdd IP Please Wait... \nXXX"
     touch /etc/wazo-phoned/conf.d/010-subnets.yml
